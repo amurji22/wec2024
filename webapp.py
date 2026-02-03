@@ -176,8 +176,8 @@ df_selection["color"] = df_selection["type"].map(disaster_color_map)
 
 # Map default
 view_state = pdk.ViewState(
-    latitude=df_selection["lat"].mean() if not df_selection.empty else 0,
-    longitude=df_selection["long"].mean() if not df_selection.empty else 0,
+    latitude=float(df_selection["lat"].mean()) if not df_selection.empty else 0.0,
+    longitude=float(df_selection["long"].mean()) if not df_selection.empty else 0.0,
     zoom=1,
     pitch=50,
 )
@@ -209,7 +209,7 @@ render = pdk.Deck(
     },
 )    
 
-render
+st.pydeck_chart(render)
 
 ## REALTIME GRAPH
 custom_color_scale = alt.Scale(domain=['tornado', 'hurricane', 'earthquake', 'flood'], range=['#FFFF00', '#A9A9A9', '#A52A2A', '#0000FF'])
